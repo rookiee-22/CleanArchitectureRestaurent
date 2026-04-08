@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="Application/Application.csproj" />
+    <Project Path="Domain/Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Infrastructure/Infrastructure.csproj" />
+    <Project Path="Persistance/Persistance.csproj" Id="eae0eacc-334d-4cb3-85a5-60b776de3861" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="WebApi/WebApi.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="Shared/Shared.csproj" Id="f0d682a3-c7cc-4d3a-b313-eb8ec2e41369" />
+  </Folder>
+</Solution>
