@@ -15,7 +15,6 @@ public class CreateCategoryCommand:IRequest<Result<int>>,ICreateMapFrom<Category
 {
     public string Name { get; set; }
     public IFormFile Profile { get; set; }
-
     public string Description { get; set; }
 }
 internal class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, Result<int>>
