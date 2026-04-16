@@ -7,6 +7,7 @@ namespace Application.Interfaces.Respositories;
 
 public interface IGenericRepository<T> where T : BaseAuditableEntity
 {
+    IQueryable<T> Entities { get; }
     Task<T> CreateAsync(T entity);
     Task UpdateAsync(T entity);
     Task DeleteAsync(int id);

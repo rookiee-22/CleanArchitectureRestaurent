@@ -11,7 +11,7 @@ public class OrderItem:BaseAuditableEntity
 {
     [ForeignKey("Order")]
  
-  public int OrderId { get; set; }
+    public int OrderId { get; set; }
     public Order Order { get; set; }
     [ForeignKey("Product")]
 

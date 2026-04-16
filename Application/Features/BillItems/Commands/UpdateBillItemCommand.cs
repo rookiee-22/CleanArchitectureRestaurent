@@ -1,6 +1,7 @@
 using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.BillItems;
+using Domain.Entities.Bills;
 using MediatR;
 using Shared;
 
@@ -40,7 +41,7 @@ internal class UpdateBillItemCommandHandler : IRequestHandler<UpdateBillItemComm
 
         if (request.CreateBillItem.BillId.HasValue)
         {
-            var bill = await _unitOfWork.Repository<Domain.Entities.Bills.Bill>().GetByIdAsync(request.CreateBillItem.BillId.Value);
+            var bill = await _unitOfWork.Repository<Bill>().GetByIdAsync(request.CreateBillItem.BillId.Value);
             if (bill == null)
             {
                 return Result<string>.BadRequest("Bill Id is not exist.");

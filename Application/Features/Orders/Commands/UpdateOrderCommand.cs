@@ -1,5 +1,6 @@
 using Application.Interfaces.Repositories;
 using AutoMapper;
+using Domain.Commons.Enums.Orders;
 using Domain.Entities.Orders;
 using MediatR;
 using Shared;
@@ -9,11 +10,13 @@ namespace Application.Features.Orders.Commands;
 public class UpdateOrderCommand : IRequest<Result<string>>
 {
     public int Id { get; set; }
-    public CreateOrderCommand CreateOrder { get; set; }
-    public UpdateOrderCommand(int id, CreateOrderCommand createOrder)
+    public OrderStatus Status { get; set; }
+
+    public UpdateOrderCommand(int id,OrderStatus status )
     {
         Id = id;
-        CreateOrder = createOrder;
+      Status = status;
+       
     }
 }
 internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, Result<string>>
@@ -29,23 +32,35 @@ internal class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, R
 
     public async Task<Result<string>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        if (request.CreateOrder.TableId != 0)
-        {
-            var table = await _unitOfWork.Repository<Domain.Entities.Tables.Table>().GetByIdAsync(request.CreateOrder.TableId);
-            if (table == null)
-            {
-                return Result<string>.BadRequest("Table Id is not exist.");
-            }
-        }
+        //if (request.CreateOrder.TableId != 0)
+        //{
+        //    var table = await _unitOfWork.Repository<Domain.Entities.Tables.Table>().GetByIdAsync(request.CreateOrder.TableId);
+        //    if (table == null)
+        //    {
+        //        return Result<string>.BadRequest("Table Id is not exist.");
+        //    }
+        //}
+
+        //var order = await _unitOfWork.Repository<Order>().GetByIdAsync(request.Id);
+        //if (order == null)
+        //{
+        //    return Result<string>.BadRequest("Order Not Found");
+        //}
+        //_mapper.Map(request.CreateOrder, order);
+        //await _unitOfWork.Repository<Order>().UpdateAsync(order);
+        //await _unitOfWork.Save(cancellationToken);
+        //return Result<string>.Success("Order Updated Succesfully");
+       
 
         var order = await _unitOfWork.Repository<Order>().GetByIdAsync(request.Id);
         if (order == null)
-        {
             return Result<string>.BadRequest("Order Not Found");
-        }
-        _mapper.Map(request.CreateOrder, order);
+
+
+        order.Status = request.Status;
+
         await _unitOfWork.Repository<Order>().UpdateAsync(order);
         await _unitOfWork.Save(cancellationToken);
-        return Result<string>.Success("Order Updated Succesfully");
+        return Result<string>.Success("Order Updated Successfully");
     }
 }

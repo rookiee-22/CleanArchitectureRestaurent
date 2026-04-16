@@ -38,9 +38,9 @@ namespace WebApi.Controllers.Bills
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBill(int id, CreateBillCommand command)
+        public async Task<IActionResult> UpdateBill(int id, UpdateBillCommand command)
         {
-            var result = await _mediator.Send(new UpdateBillCommand(id, command));
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
 

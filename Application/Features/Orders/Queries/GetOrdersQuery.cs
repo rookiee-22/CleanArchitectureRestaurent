@@ -3,6 +3,7 @@ using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Orders;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shared;
 
 namespace Application.Features.Orders.Queries;
@@ -23,8 +24,16 @@ internal class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, Result<Li
 
     public async Task<Result<List<GetOrderDto>>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
-        var orders = await _unitOfWork.Repository<Order>().GetAllAsync();
+        var orders = await _unitOfWork.Repository<Order>()
+          .Entities
+          .Include(o => o.Items.Where(i => i.IsDeleted != true))
+              .ThenInclude(i => i.Product).ThenInclude(c=>c.Category)
+          .Where(x => x.IsDeleted != true)
+          .ToListAsync();
+
+        //var orders = await _unitOfWork.Repository<Order>().GetAllAsync();
         var result = _mapper.Map<List<GetOrderDto>>(orders);
+
         return Result<List<GetOrderDto>>.Success(result, "Orders");
     }
 }

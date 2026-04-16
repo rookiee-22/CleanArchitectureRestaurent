@@ -39,7 +39,7 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-    [Authorize]
+   
     [HttpPost("reset-password")]
     public async Task<IActionResult> ResetPassword(ResetPasswordCommand command)
     {

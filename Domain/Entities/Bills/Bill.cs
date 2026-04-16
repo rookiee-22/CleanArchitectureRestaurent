@@ -14,7 +14,7 @@ public class Bill :BaseAuditableEntity
 {
     public decimal TotalAmount { get; set; }
     public string? Note { get; set; }
-    public BillStatus Status { get; set; } = BillStatus.Preparing;
+    public BillStatus Status { get; set; } = BillStatus.Done;
     public ICollection<BillItem> BillItems { get; set; } = new List<BillItem>();
     [ForeignKey("Table")]
     public int TableId { get; set; }

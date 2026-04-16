@@ -3,8 +3,8 @@ using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Carts;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shared;
-using System.Collections.Generic;
 
 namespace Application.Features.Carts.Queries;
 
@@ -24,7 +24,21 @@ internal class GetCartsQueryHandler : IRequestHandler<GetCartsQuery, Result<List
 
     public async Task<Result<List<GetCartDto>>> Handle(GetCartsQuery request, CancellationToken cancellationToken)
     {
-        var carts = await _unitOfWork.Repository<Cart>().GetAllAsync();
+
+        //var carts = await _unitOfWork.Repository<Cart>().Entities.Include(x=>x.Items).ToListAsync();
+        //    var carts = await _unitOfWork.Repository<Cart>()
+        //.Entities
+        //    .Include(c => c.Items).ThenInclude(i => i.Product).Where(x=>x.IsDeleted!=true).ToListAsync();
+        var carts = await _unitOfWork.Repository<Cart>()
+        .Entities
+        .Include(c => c.Items.Where(i => i.IsDeleted != true))
+            .ThenInclude(i => i.Product)
+        .Where(x => x.IsDeleted != true)
+        .ToListAsync();
+        //.ThenInclude(i => i.Product)
+
+
+        //var carts = await _unitOfWork.Repository<Cart>().GetAllAsync();
         var result = _mapper.Map<List<GetCartDto>>(carts);
         return Result<List<GetCartDto>>.Success(result, "Carts");
     }

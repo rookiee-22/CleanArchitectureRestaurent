@@ -1,20 +1,29 @@
 using Application.Extensions;
 using Application.Interfaces.Repositories;
+using Infrastructure.Extensions;
+using Infrastructure.Extensions.Services;
 using Microsoft.IdentityModel.Tokens;
 using Persistance.Extensions;
 using System.Text;
-using Infrastructure.Services;
+using WebApi.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddPersitenceLayer(builder.Configuration);
 builder.Services.AddApplicationLayer();
 builder.Services.AddControllers();
-builder.Services.AddScoped<IGenerateToken, GenerateToken1>();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddInfrastructureLayer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") 
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials(); 
+        });
+});
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer(options =>
     {
@@ -61,13 +70,12 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
-// Configure the HTTP request pipeline.
-
-    //app.MapOpenApi();
-
-
+//app.MapOpenApi();
+app.UseStaticFiles();
 app.UseHttpsRedirection();
+app.UseCors("MyPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

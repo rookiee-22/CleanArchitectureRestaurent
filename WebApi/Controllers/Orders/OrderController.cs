@@ -38,9 +38,9 @@ namespace WebApi.Controllers.Orders
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(int id, CreateOrderCommand command)
+        public async Task<IActionResult> UpdateOrder(int id, UpdateOrderCommand command)
         {
-            var result = await _mediator.Send(new UpdateOrderCommand(id, command));
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
 

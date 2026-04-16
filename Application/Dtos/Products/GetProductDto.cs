@@ -1,4 +1,5 @@
 ﻿using Application.Commons.Mappings.Commons;
+using Application.Dtos.Categories;
 using Application.Dtos.Commons;
 using Domain.Entities.Products;
 using System;
@@ -13,5 +14,5 @@ public class GetProductDto : CommonDto,IMapFrom<Product>
     public int Price { get; set; }
     public string Profile { get; set; }
     public string Description { get; set; }
-    public int CategoryId { get; set; }
+    public GetCategoryDto Category { get; set; }
 }

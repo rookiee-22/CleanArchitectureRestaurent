@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Infrastructure.Services;
+namespace Infrastructure.Extensions.Services;
 
 public class FileService : IFileService
 {

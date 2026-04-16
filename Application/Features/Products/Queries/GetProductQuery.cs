@@ -3,6 +3,7 @@ using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Products;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Shared;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ internal class GetProductQueryHandler : IRequestHandler<GetProductQuery, Result<
 
     public async Task<Result<List<GetProductDto>>> Handle(GetProductQuery request, CancellationToken cancellationToken)
     {
-        var products = await _unitOfWork.Repository<Product>().GetAllAsync();
+        var products = await _unitOfWork.Repository<Product>().Entities.Include(x=>x.Category).Where(c=>c.IsDeleted!=true).ToListAsync();
         var result= _mapper.Map<List<GetProductDto>>(products);
         return Result<List<GetProductDto>>.Success(result, "Products ");
     }

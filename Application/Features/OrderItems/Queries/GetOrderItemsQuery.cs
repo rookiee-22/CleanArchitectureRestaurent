@@ -23,6 +23,7 @@ internal class GetOrderItemsQueryHandler : IRequestHandler<GetOrderItemsQuery, R
 
     public async Task<Result<List<GetOrderItemDto>>> Handle(GetOrderItemsQuery request, CancellationToken cancellationToken)
     {
+
         var orderItems = await _unitOfWork.Repository<OrderItem>().GetAllAsync();
         var result = _mapper.Map<List<GetOrderItemDto>>(orderItems);
         return Result<List<GetOrderItemDto>>.Success(result, "OrderItems");

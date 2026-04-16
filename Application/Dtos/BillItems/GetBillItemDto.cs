@@ -1,5 +1,7 @@
 ﻿using Application.Commons.Mappings.Commons;
 using Application.Dtos.Commons;
+using Application.Dtos.Products;
+using AutoMapper;
 using Domain.Entities.BillItems;
 
 namespace Application.Dtos.BillItems;
@@ -10,8 +12,9 @@ public class GetBillItemDto : CommonDto, IMapFrom<BillItem>
     public int Quantity { get; set; }
 
     public decimal Total => Price * Quantity;
-    public int ProductId { get; set; }
+    public GetProductDto Product { get; set; }
     public int BillId { get; set; }
+  
 
 
 }

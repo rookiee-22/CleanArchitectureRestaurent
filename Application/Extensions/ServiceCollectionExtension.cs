@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using Application.Interfaces.Repositories;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+
 
 namespace Application.Extensions;
 
@@ -23,5 +25,6 @@ public static class ServiceCollectionExtension
     public static void AddService(this IServiceCollection services)
     {
         services.AddTransient<IMediator, Mediator>();
+       
     }
 }

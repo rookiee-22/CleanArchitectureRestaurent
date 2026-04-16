@@ -1,4 +1,5 @@
 using Application.Dtos.Commons;
+using Application.Dtos.Tables;
 using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.Tables;
@@ -7,7 +8,7 @@ using Shared;
 
 namespace Application.Features.Tables.Queries;
 
-public class GetTableByIdQuery : IRequest<Result<CommonDto>>
+public class GetTableByIdQuery : IRequest<Result<GetTableDto>>
 {
     public int Id { get; set; }
     public GetTableByIdQuery(int id)
@@ -15,7 +16,7 @@ public class GetTableByIdQuery : IRequest<Result<CommonDto>>
         Id = id;
     }
 }
-internal class GetTableByIdQueryHandler : IRequestHandler<GetTableByIdQuery, Result<CommonDto>>
+internal class GetTableByIdQueryHandler : IRequestHandler<GetTableByIdQuery, Result<GetTableDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -26,10 +27,10 @@ internal class GetTableByIdQueryHandler : IRequestHandler<GetTableByIdQuery, Res
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result<CommonDto>> Handle(GetTableByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<GetTableDto>> Handle(GetTableByIdQuery request, CancellationToken cancellationToken)
     {
         var table = await _unitOfWork.Repository<Table>().GetByIdAsync(request.Id);
-        var result = _mapper.Map<CommonDto>(table);
-        return Result<CommonDto>.Success(result, "Table");
+        var result = _mapper.Map<GetTableDto>(table);
+        return Result<GetTableDto>.Success(result, "Table");
     }
 }

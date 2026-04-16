@@ -5,13 +5,15 @@ using Domain.Entities.Tables;
 using MediatR;
 using Shared;
 using Application.Dtos.Commons;
+using Application.Dtos.Tables;
 
 namespace Application.Features.Tables.Queries;
 
-public class GetTablesQuery : IRequest<Result<List<CommonDto>>>
+public class GetTablesQuery : IRequest<Result<List<GetTableDto>>>
 {
+
 }
-internal class GetTablesQueryHandler : IRequestHandler<GetTablesQuery, Result<List<CommonDto>>>
+internal class GetTablesQueryHandler : IRequestHandler<GetTablesQuery, Result<List<GetTableDto>>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
@@ -22,10 +24,10 @@ internal class GetTablesQueryHandler : IRequestHandler<GetTablesQuery, Result<Li
         _mapper = mapper;
     }
 
-    public async Task<Result<List<CommonDto>>> Handle(GetTablesQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<GetTableDto>>> Handle(GetTablesQuery request, CancellationToken cancellationToken)
     {
         var tables = await _unitOfWork.Repository<Table>().GetAllAsync();
-        var result = _mapper.Map<List<CommonDto>>(tables);
-        return Result<List<CommonDto>>.Success(result, "Tables");
+        var result = _mapper.Map<List<GetTableDto>>(tables);
+        return Result<List<GetTableDto>>.Success(result, "Tables");
     }
 }

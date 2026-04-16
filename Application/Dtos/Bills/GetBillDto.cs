@@ -1,5 +1,7 @@
 ﻿using Application.Commons.Mappings.Commons;
+using Application.Dtos.BillItems;
 using Application.Dtos.Commons;
+using AutoMapper;
 using Domain.Commons.Enums.BIlls;
 using Domain.Entities.BillItems;
 using Domain.Entities.Bills;
@@ -13,7 +15,8 @@ public class GetBillDto : CommonDto,IMapFrom<Bill>
 {
     public decimal TotalAmount { get; set; }
     public string? Note { get; set; }
-    public BillStatus Status { get; set; } = BillStatus.Preparing;
-    public ICollection<BillItem> BillItems { get; set; } = new List<BillItem>();
+    public BillStatus Status { get; set; } = BillStatus.Done;
+    public List<GetBillItemDto> BillItems { get; set; } = new();
     public int TableId { get; set; }
+ 
 }

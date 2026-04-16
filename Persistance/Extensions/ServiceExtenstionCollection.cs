@@ -26,5 +26,6 @@ public static class ServiceExtenstionCollection
     {
         services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork));
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
     }
 }

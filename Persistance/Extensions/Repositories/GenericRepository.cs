@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces.Respositories;
 using Domain.Commons;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Persistance.DataContexts;
 
@@ -21,6 +22,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseAuditabl
 
         return entity;
     }
+    public IQueryable<T> Entities => _context.Set<T>();
 
     public async Task DeleteAsync(int id)
     {

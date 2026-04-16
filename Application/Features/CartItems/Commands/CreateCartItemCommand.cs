@@ -1,4 +1,5 @@
 using Application.Commons.Mappings.Commons;
+using Application.Dtos.Products;
 using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities.CartItems;
@@ -10,7 +11,7 @@ namespace Application.Features.CartItems.Commands;
 public class CreateCartItemCommand : IRequest<Result<int>>, ICreateMapFrom<CartItem>
 {
     public int CartId { get; set; }
-    public int ProductId { get; set; }
+    public int  ProductId { get; set; }
     public int Quantity { get; set; }
     public decimal UnitPrice { get; set; }
 }

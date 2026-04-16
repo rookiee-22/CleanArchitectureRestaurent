@@ -6,8 +6,8 @@ namespace Domain.Commons.Enums.BIlls;
 
 public enum BillStatus
 {
-    Preparing = 1,
-    Completed = 2,
-    Cancelled = 3
+    Pending=1,
+    Done=2,
+
 }
 

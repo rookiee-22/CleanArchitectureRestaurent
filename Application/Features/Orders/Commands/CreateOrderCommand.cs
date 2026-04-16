@@ -1,6 +1,7 @@
 using Application.Commons.Mappings.Commons;
 using Application.Interfaces.Repositories;
 using AutoMapper;
+using Domain.Commons.Enums.Orders;
 using Domain.Entities.Orders;
 using MediatR;
 using Shared;
@@ -11,6 +12,7 @@ public class CreateOrderCommand : IRequest<Result<int>>, ICreateMapFrom<Order>
 {
     public int TableId { get; set; }
     public string Note { get; set; }
+    public OrderStatus Status { get; set; } = OrderStatus.Pending;
 }
 internal class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Result<int>>
 {

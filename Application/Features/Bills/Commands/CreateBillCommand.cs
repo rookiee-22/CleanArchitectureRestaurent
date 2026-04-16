@@ -1,7 +1,9 @@
 using Application.Commons.Mappings.Commons;
 using Application.Interfaces.Repositories;
 using AutoMapper;
+using Domain.Entities.BillItems;
 using Domain.Entities.Bills;
+using Domain.Entities.Tables;
 using MediatR;
 using Shared;
 
@@ -11,6 +13,9 @@ public class CreateBillCommand : IRequest<Result<int>>, ICreateMapFrom<Bill>
 {
     public int TableId { get; set; }
     public string Note { get; set; }
+    
+
+
 }
 internal class CreateBillCommandHandler : IRequestHandler<CreateBillCommand, Result<int>>
 {
@@ -25,7 +30,8 @@ internal class CreateBillCommandHandler : IRequestHandler<CreateBillCommand, Res
 
     public async Task<Result<int>> Handle(CreateBillCommand request, CancellationToken cancellationToken)
     {
-        var table = await _unitOfWork.Repository<Domain.Entities.Tables.Table>().GetByIdAsync(request.TableId);
+        var table = await _unitOfWork.Repository<Table>().GetByIdAsync(request.TableId);
+        
         if (table == null)
         {
             return Result<int>.BadRequest("Table id not exist");

@@ -1,5 +1,7 @@
 ﻿using Application.Commons.Mappings.Commons;
 using Application.Dtos.Commons;
+using Application.Dtos.OrderItems;
+using AutoMapper;
 using Domain.Commons.Enums.Orders;
 using Domain.Entities.Orders;
 using System;
@@ -16,6 +18,8 @@ public class GetOrderDto : CommonDto,IMapFrom<Order>
 
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
-    public List<OrderItem> Items { get; set; } = new List<OrderItem>();
+    public List<GetOrderItemDto> Items { get; set; } = new();
     public int TotalPrice { get; set; }
+
+   
 }

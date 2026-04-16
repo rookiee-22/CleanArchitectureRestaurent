@@ -17,6 +17,6 @@ public class Order : BaseAuditableEntity
 
     public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
-    public List<OrderItem> Items { get; set; } = new List<OrderItem>();
     public int TotalPrice { get; set; }
+    public List<OrderItem> Items { get; set; } = new List<OrderItem>();
 }
