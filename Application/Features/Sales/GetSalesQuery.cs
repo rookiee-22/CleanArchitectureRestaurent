@@ -26,21 +26,7 @@ internal class GetSalesQueryHandler : IRequestHandler<GetSalesQuery, Result<GetS
 
     public async Task<Result<GetSalesDto>> Handle(GetSalesQuery request, CancellationToken cancellationToken)
     {
-        //    var bills = await _unitOfWork.Repository<Bill>()
-        //   .Entities
-        //   .Include(b => b.BillItems.Where(i => i.IsDeleted != true))
-        //   .Where(b => b.IsDeleted != true)
-        //   .ToListAsync();
-
-        //    var salesData = new GetSalesDto
-        //    {
-        //        TodaySales = 1000m,
-        //        ThisWeekSales = 5000m,
-        //        ThisMonthSales = 20000m,
-        //        TotalOrders = 150
-        //    };
-        //    return Result<GetSalesDto>.Success(salesData, "Sales data retrieved successfully.");
-        //}
+       
 
         var today = DateTime.Today;
 
