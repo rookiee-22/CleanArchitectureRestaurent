@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Tables
 {
-    [Route("api/[controller]")]
+    [Route("api/table")]
     [ApiController]
     public class TableController : ControllerBase
     {

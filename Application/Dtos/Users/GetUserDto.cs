@@ -12,6 +12,7 @@ public class GetUserDto:CommonDto,IMapFrom<User>
     public string Name { get; set; }
     public string Email { get; set; }
     public long MobileNo { get; set; }
-    
+    public int Role { get; set; }
+
 
 }

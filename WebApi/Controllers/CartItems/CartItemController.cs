@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.CartItems
 {
-    [Route("api/[controller]")]
+    [Route("api/cart-item")]
     [ApiController]
     public class CartItemController : ControllerBase
     {

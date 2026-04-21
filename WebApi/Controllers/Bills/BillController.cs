@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Bills
 {
-    [Route("api/[controller]")]
+    [Route("api/bill")]
     [ApiController]
     public class BillController : ControllerBase
     {

@@ -1,4 +1,5 @@
 ﻿using Domain.Commons;
+using Domain.Commons.Enums.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,6 @@ public class User:BaseAuditableEntity
     public string Email { get; set; }
     public long MobileNo { get; set; }
     public string Password { get; set; }
+    public Role Role { get; set; }
 
 }

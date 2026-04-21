@@ -4,6 +4,7 @@ using Infrastructure.Extensions;
 using Infrastructure.Extensions.Services;
 using Microsoft.IdentityModel.Tokens;
 using Persistance.Extensions;
+using System.Security.Claims;
 using System.Text;
 using WebApi.Middleware;
 var builder = WebApplication.CreateBuilder(args);
@@ -38,7 +39,8 @@ builder.Services.AddAuthentication("Bearer")
             ValidAudience = builder.Configuration["JwtSettings:Audience"],
 
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]))
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"])),
+             RoleClaimType = ClaimTypes.Role
         };
     });
 

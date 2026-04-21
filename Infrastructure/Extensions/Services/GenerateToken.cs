@@ -1,4 +1,6 @@
 ﻿using Application.Interfaces.Repositories;
+using Domain.Commons.Enums.Users;
+using Domain.Entities.Users;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -18,7 +20,7 @@ public class GenerateToken1: IGenerateToken
         _config = config;
     }
 
-    public string GenerateToken(string email)
+    public string GenerateToken(string email,Role role)
     {
         var secretKey = _config["JwtSettings:SecretKey"]   
             ?? throw new InvalidOperationException("JWT SecretKey is not configured.");
@@ -27,7 +29,8 @@ public class GenerateToken1: IGenerateToken
 
         var claims = new List<Claim>
     {
-        new Claim("username", email)
+        new Claim("username", email),
+         new Claim("role", ((int)role).ToString())
     };
 
         var token = new JwtSecurityToken(

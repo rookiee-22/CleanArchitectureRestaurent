@@ -49,10 +49,9 @@ internal class VerifyOtpCommandHandler : IRequestHandler<VerifyOtpCommand, Resul
             return Result<string>.BadRequest("User not found");
         }
 
-        user.IsActive = true;
-        user.IsDeleted = false;
+      
         await _unitOfWork.Repository<User>().UpdateAsync(user);
         await _unitOfWork.Save(cancellationToken);
-        return Result<string>.Success(_generateToken.GenerateToken(user.Email), "OTP verified successfully.");
+        return Result<string>.Success(_generateToken.GenerateToken(user.Email,user.Role), "OTP verified successfully.");
     }
 }

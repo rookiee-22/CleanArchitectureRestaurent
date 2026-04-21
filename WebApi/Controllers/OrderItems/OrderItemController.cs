@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.OrderItems
 {
-    [Route("api/[controller]")]
+    [Route("api/order-item")]
     [ApiController]
     public class OrderItemController : ControllerBase
     {

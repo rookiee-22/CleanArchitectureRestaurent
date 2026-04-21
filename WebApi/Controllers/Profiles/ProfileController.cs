@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Profiles
 {
-    [Route("api/[controller]")]
+    [Route("api/profile")]
     [ApiController]
     public class ProfileController : ControllerBase
     {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers.Users
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace WebApi.Controllers.Users
         {
             _mediator = mediator;
         }
-        
+        [Authorize(Roles ="1")]
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
